@@ -12,7 +12,8 @@ export default function Allroutes() {
   const _id = useSelector((state) => state.auth?.user?.user._id);
 
   useEffect(() => {
-    const newSocket = io(import.meta.env.VITE_SOCKET_URL);
+    const newSocket = io(import.meta.env.VITE_SOCKET_URL, {
+    });
 
     console.log(newSocket);
 

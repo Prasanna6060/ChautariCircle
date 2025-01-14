@@ -20,7 +20,7 @@ export default function Sidebar() {
         }
     }
   return (
-    <div className="p-2 flex flex-col justify-between h-screen items-center">
+    <div className="p-2 flex flex-col justify-between h-screen items-center bg-cyan-500 ">
       <div className="flex gap-2 items-center relative">
         <input
           type="text"

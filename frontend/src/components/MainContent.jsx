@@ -8,7 +8,8 @@ export default function MainContent() {
     setMessage(e.target.value)
   }
   return (
-    <div className='flex flex-col justify-between items-center p-5 w-full bg-gray-400 text-white'>MainContent
+    <div className='flex flex-col justify-between items-center p-5 w-full bg-[#E4DAC1]  font-Aleo '>MainContent
+        <p>{message}</p>
 
                   {/* Input div */}
           <div className='w-full flex items-center gap-2'>
@@ -17,7 +18,9 @@ export default function MainContent() {
             type="text" placeholder='Type message here...'
             value={message}
             onChange={handleChange}/>
+            <button>
             <FaLocationArrow size={40} className='cursor-pointer text-black transfrom rotate-45 tetx-xl'/>
+            </button>
           </div>
 
     </div>

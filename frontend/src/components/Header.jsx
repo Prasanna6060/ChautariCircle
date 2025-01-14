@@ -8,11 +8,11 @@ export default function Header() {
       <Link to='/'><div className="flex items-center m-2 gap-x-2">
         <img src={logo} width={40} height={40} />
         <h1 className="text-green-800 text-2xl font-bold">
-          Chautari <span className="text-blue-800">Circle</span>
+          Chautari <span className="text-green-800">Circle</span>
         </h1>
       </div>
       </Link>
-      <p>Nepal's Chat app</p>
+      <p className="text-xl font-semibold">Nepal's own  chatting platform</p>
     </header>
   );
 }
