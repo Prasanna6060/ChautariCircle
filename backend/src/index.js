@@ -8,6 +8,7 @@ import cookieParser from "cookie-parser";
 import userRouter from '../routes/user.js'
 import postRouter from "../routes/posts.js";
 import authRouter from '../routes/auth.route.js'
+import messageRouter from '../routes/message.route.js'
 import { server, app }  from "./socket.js";
 
 
@@ -28,6 +29,7 @@ app.use(cookieParser());
 app.use('/api/posts', postRouter);
 app.use('/api/users', userRouter);
 app.use('/api/auth', authRouter)
+app.use('/api/message', messageRouter);
 
 app.get('/', (req, res) => {
   res.send('Hello World!')
