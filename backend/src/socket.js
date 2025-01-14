@@ -14,11 +14,25 @@ const io = new Server(server, {
     }
 })
 
+const userSocketMap = {};
+
 io.on("connection", (socket) => {
     console.log(`new client connected ${socket.id}`)
+    
+
+     const userId = socket.handshake.query.userId;
+
+     if(userId) {
+        userSocketMap[userId] = socket.id
+     }
+
+     socket.emit('onlineUsers', userSocketMap)
 
     socket.on("disconnect", () => {
         console.log(`Client disconnected ${socket.id}`)
+        if(userId) {
+            delete userSocketMap[userId]
+        }
     })
 })
 

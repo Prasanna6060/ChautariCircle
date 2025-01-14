@@ -9,22 +9,26 @@ import { useSelector } from "react-redux";
 
 export default function Allroutes() {
   const [socket, setSocket] = useState(null);
-  const _id = useSelector((state) => state.auth?.user?.user._id);
+  const userId = useSelector((state) => state.auth?.user?.user._id);
 
   useEffect(() => {
     const newSocket = io(import.meta.env.VITE_SOCKET_URL, {
+      query: {userId}
     });
+       setSocket(newSocket)
+                
+       newSocket.on("onlineUsers", (data) => {
+        console.log(data);
+       })
 
-    console.log(newSocket);
-
-    if (_id === undefined || _id === null) {
+    if (userId === undefined || userId === null) {
       newSocket.disconnect();
     }
 
     return () => {
       newSocket.disconnect("disconnection");
     };
-  }, [_id]);
+  }, [userId]);
 
   return (
     <>

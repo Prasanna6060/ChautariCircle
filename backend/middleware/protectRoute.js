@@ -1,22 +1,32 @@
 import jwt from 'jsonwebtoken';
 
 export const protectRoute = (req,res, next) => {
-    const cookie = req.header('cookie')
-    const token = cookie.split('=')[1];
+    try {
 
-    if(!token) {
-        return res.status(401).json({message: 'Unauthorized'});
-    }
+        const cookie = req.header('cookie')
+        if(cookie === null || cookie === undefined){
+            return res.status(401).json({message: 'Unauthorized'})
+        }
+        const token = cookie.split('=')[1];
     
-
-    const secretKey = process.env.JWT_SECRET
-
-    const decoded = jwt.verify(token, secretKey)
-    if(!decoded) {
-        return res.status(401).json({message: 'Unauthorized'});
+        if(!token) {
+            return res.status(401).json({message: 'Unauthorized'});
+        }
+        
+    
+        const secretKey = process.env.JWT_SECRET
+    
+        const decoded = jwt.verify(token, secretKey)
+        if(!decoded) {
+            return res.status(401).json({message: 'Unauthorized'});
+        }
+    
+        req.user = decoded.id
+        next();
+        
+    } catch (error) {
+        console.log(error)
     }
-
-    req.user = decoded.id
-    next();
+   
 }
 
