@@ -23,15 +23,16 @@ io.on("connection", (socket) => {
      const userId = socket.handshake.query.userId;
 
      if(userId) {
-        userSocketMap[userId] = socket.id
+        userSocketMap[userId] = socket.id;
      }
 
-     socket.emit('onlineUsers', userSocketMap)
+     socket.emit('onlineUsers', Object.keys(userSocketMap));
 
     socket.on("disconnect", () => {
         console.log(`Client disconnected ${socket.id}`)
         if(userId) {
             delete userSocketMap[userId]
+            socket.emit('onlineUsers', Object.keys(userSocketMap))
         }
     })
 })

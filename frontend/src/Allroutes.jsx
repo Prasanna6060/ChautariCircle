@@ -5,19 +5,20 @@ import Signin from "./pages/Signin";
 import { io } from "socket.io-client";
 import Profile from "./components/Profile";
 import ProtectedRoute from "./pages/ProtectedRoute";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { setOnlineUser } from "./redux/authSlice";
 
 export default function Allroutes() {
-  const [socket, setSocket] = useState(null);
   const userId = useSelector((state) => state.auth?.user?.user._id);
+  const dispatch = useDispatch();
 
   useEffect(() => {
     const newSocket = io(import.meta.env.VITE_SOCKET_URL, {
       query: {userId}
     });
-       setSocket(newSocket)
                 
        newSocket.on("onlineUsers", (data) => {
+        dispatch(setOnlineUser(data))
         console.log(data);
        })
 
